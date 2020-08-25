@@ -44,7 +44,12 @@
                                     </div>
                                     <div class="form-group">
                                         <input type="password" class="form-control form-control-user" id="exampleInputPassword" name="password" placeholder="Password">
+                                        
+	                                    <div class="invalid-feedback d-block" th:if="${session['SPRING_SECURITY_LAST_EXCEPTION']} != null">
+									    	<span th:text="${session['SPRING_SECURITY_LAST_EXCEPTION'].message}"></span>
+									    </div>
                                     </div>
+                                    
                                     <div class="form-group">
                                         <div class="custom-control custom-checkbox small">
                                             <input type="checkbox" class="custom-control-input" id="customCheck">
