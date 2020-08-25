@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table class="table table-striped" th:object="${client}">
+    <tr>
+        <th>이름</th>
+        <td><b th:text="*{name}"></b></td>
+    </tr>
+    <tr>
+        <th>설명</th>
+        <td th:text="*{description}" /></td>
+    </tr>
+
+</table>
+</body>
+</html>
