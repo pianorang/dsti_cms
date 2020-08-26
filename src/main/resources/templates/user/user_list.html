@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/default">
+<head>
+    <!-- Page level plugins -->
+    <link href="/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <script src="/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+    <!-- Page level custom scripts -->
+</head>
+<body>
+<div class="container-fluid" layout:fragment="content">
+    <!-- Page Heading -->
+    
+    <div class="card shadow mb-4">
+		<div class="card-header py-3">
+			<h6 class="m-0 font-weight-bold text-primary">사용자</h6>
+			<a href="/user/new" class="btn btn-success">
+                <span class="text">등록</span>
+            </a>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+            
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>이름1</th>
+                        <th>설명</th>
+                        <th>등록일</th>
+                    </tr>
+                    </thead>
+
+                </table>
+            </div>
+        </div>
+    </div>
+    <script>
+
+        $('#dataTable').DataTable({
+            "processing": true,
+            "serverSide": true,
+            "info": true,
+            "stateSave": true,
+            "ajax":{
+                url: "/api/user/list",
+                "data": function ( d ) {
+                  var info = $('#dataTable').DataTable().page.info();
+                  return {
+                    draw: d.draw,
+                    page: info.page,
+                    length: info.length
+                  }
+                },
+
+            },
+            columnDefs: [
+                {
+                    "targets": [0, 1],
+                    "render": function ( data, type, row ) {                    	
+                        return '<a href="/user/'+ row.id + '">' + data + '</a>';
+                    },
+                }
+            ],
+            "columns" : [
+                {
+                    "data": "id"
+                },
+                {"data": "userName"},
+                {"data": "userAccount"},
+                {"data": "createDate"},
+            ]
+
+        });
+    </script>
+</div>
+
+
+</body>
+</html>

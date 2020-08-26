@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -13,6 +15,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import kr.co.dsti.cms.model.DataTable;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -84,8 +88,19 @@ public class UserService implements UserDetailsService {
         return userRepository.save(user);
     }
 
-    public Optional<User> findById(Long id){
-        return userRepository.findById(id);
+    public User findById(Long id){
+        return userRepository.getOne(id);
+    }
+    
+    public DataTable getList(Pageable pageable, Integer draw){
+        Page<User> list = userRepository.findAll(pageable);
+        DataTable dt = new DataTable();
+        dt.setDraw(draw);
+        dt.setData(list.getContent());
+        dt.setRecordsFiltered(list.getTotalElements());
+        dt.setRecordsTotal(list.getTotalElements());
+
+        return dt;
     }
 
 }
