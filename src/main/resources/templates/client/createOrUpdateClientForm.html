@@ -8,26 +8,26 @@
 <body>
 <div class="container-fluid" layout:fragment="content">
     <!-- Page Heading -->
-    <h1 class="h3 mb-4 text-gray-800">클라이언트 등록</h1>
+    <h1 class="h3 mb-4 text-gray-800">사용자 등록</h1>
     <div class="col-md-6">
         <div class="main-card mb-3 card">
             <div class="card-body"><h5 class="card-title">Controls Types</h5>
-                <form th:object="${client}" id="clientForm" method="post">
+                <form th:object="${user}" id="userForm" method="post">
 <!--                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />-->
                     <div class="position-relative form-group">
                         <label for="name" class="">이름</label>
-                        <input name="name" id="name" placeholder="이름" type="text" class="form-control" th:value="${client['name']}">
+                        <input name="name" id="name" placeholder="이름" type="text" class="form-control" th:value="${user['name']}">
                         <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</span>
                     </div>
                     <div class="position-relative form-group">
                         <label for="description" class="">설명</label>
-                        <textarea name="description" id="description" placeholder="설명" class="form-control" th:text="${client.description}"></textarea>
+                        <textarea name="description" id="description" placeholder="설명" class="form-control" th:text="${user.description}"></textarea>
                     </div>
-                    <button th:with="text=${client['new']} ? '추가' : '수정'"
+                    <button th:with="text=${user['new']} ? '추가' : '수정'"
                             class="mt-1 btn btn-primary" type="submit" th:text="${text}">
                         추가
                     </button>
-                    <button type="button" onclick="location.href='/client'" class="mt-1 btn btn-secondary">목록</button>
+                    <button type="button" onclick="location.href='/user'" class="mt-1 btn btn-secondary">목록</button>
                 </form>
             </div>
         </div>

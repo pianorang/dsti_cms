@@ -12,22 +12,28 @@
     <div class="col-md-6">
         <div class="main-card mb-3 card">
             <div class="card-body"><h5 class="card-title">Controls Types</h5>
-                <form th:object="${client}" id="clientForm" method="post">
+                <form th:action="@{/user/new}" th:object="${user}" id="userForm" method="post">
 <!--                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />-->
                     <div class="position-relative form-group">
-                        <label for="name" class="">이름</label>
-                        <input name="name" id="name" placeholder="이름" type="text" class="form-control" th:value="${client['name']}">
-                        <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</span>
+                        <label for="userName" class="">이름</label>
+                        <input name="userName" id="userName" placeholder="이름" type="text" class="form-control" th:value="${user['userName']}">
+                        <span th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}">Name Error</span>
                     </div>
                     <div class="position-relative form-group">
-                        <label for="description" class="">설명</label>
-                        <textarea name="description" id="description" placeholder="설명" class="form-control" th:text="${client.description}"></textarea>
+                        <label for="userAccount" class="">아이디</label>
+                        <input name="userAccount" id="userAccount" placeholder="아이디" type="text" class="form-control" th:value="${user['userAccount']}">
+                        <span th:if="${#fields.hasErrors('userAccount')}" th:errors="*{userAccount}">ID Error</span>
                     </div>
-                    <button th:with="text=${client['new']} ? '추가' : '수정'"
+                     <div class="position-relative form-group">
+                        <label for="userPassword" class="">비밀번호</label>
+                        <input name="userPassword" id="userPassword" placeholder="비밀번호" type="password" class="form-control" th:value="${user['userPassword']}">
+                        <span th:if="${#fields.hasErrors('userPassword')}" th:errors="*{userPassword}">Password Error</span>
+                    </div>                    
+                    <button th:with="text=${user['new']} ? '추가' : '수정'"
                             class="mt-1 btn btn-primary" type="submit" th:text="${text}">
                         추가
                     </button>
-                    <button type="button" onclick="location.href='/client'" class="mt-1 btn btn-secondary">목록</button>
+                    <button type="button" onclick="location.href='/user'" class="mt-1 btn btn-secondary">목록</button>
                 </form>
             </div>
         </div>
