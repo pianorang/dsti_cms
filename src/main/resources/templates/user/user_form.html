@@ -24,20 +24,49 @@
                         <input name="userAccount" id="userAccount" placeholder="아이디" type="text" class="form-control" th:value="${user['userAccount']}">
                         <span th:if="${#fields.hasErrors('userAccount')}" th:errors="*{userAccount}">ID Error</span>
                     </div>
-                     <div class="position-relative form-group">
+                    <div class="position-relative form-group">
                         <label for="userPassword" class="">비밀번호</label>
                         <input name="userPassword" id="userPassword" placeholder="비밀번호" type="password" class="form-control" th:value="${user['userPassword']}">
                         <span th:if="${#fields.hasErrors('userPassword')}" th:errors="*{userPassword}">Password Error</span>
+                    </div>
+                    <div class="position-relative form-group">
+                        <label for="userPasswordConfirm" class="">비밀번호 확인22333</label>
+                        <input name="userPasswordConfirm" id="userPasswordConfirm" placeholder="비밀번호 확인" type="password" class="form-control">                        
                     </div>                    
                     <button th:with="text=${user['new']} ? '추가' : '수정'"
                             class="mt-1 btn btn-primary" type="submit" th:text="${text}">
-                        추가
+                       	 추가
                     </button>
                     <button type="button" onclick="location.href='/user'" class="mt-1 btn btn-secondary">목록</button>
                 </form>
             </div>
         </div>
     </div>
+    <script>
+    	$('#userForm').validate({
+    		rules: {
+    			userName: "required",
+    			userAccount: "required",    			
+    			userPassword: "required",
+    			userPasswordConfirm: {
+   			    	equalTo: "#userPassword"
+   			    }
+   			}
+   		});
+    
+    	function onFormSubmit(){
+    		var pwd = $('#userPassword').val();
+    		var pwdConfirm = $('#userPasswordConfirm').val(); 
+    		
+    		if(pwd != pwdConfirm){
+    			alert('')
+    			return false
+    		}
+    		
+    		return true
+    		
+    	}
+    </script>
 </div>
 </body>
 </html>
